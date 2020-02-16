@@ -10,9 +10,9 @@ all_test_files="
 
 for test_file in $all_test_files
 do
-	clang-8 -O3 -emit-llvm $test_file.c -c -o $test_file.bc
-	opt -load $LLVM_HOME/build/lib/LLVMTest.so -test < $test_file.bc > /dev/null
-	rm $test_file.bc
+	clang-8 -O3 -emit-llvm $test_file.c -S -o $test_file.ll
+	opt -load $LLVM_HOME/build/lib/LLVMTest.so -test < $test_file.ll > /dev/null
+	rm $test_file.ll
 done
 
 
