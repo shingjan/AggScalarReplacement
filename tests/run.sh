@@ -10,8 +10,10 @@ all_test_files="
 
 for test_file in $all_test_files
 do
-	clang-8 -O3 -emit-llvm $test_file.c -S -o $test_file.ll
+	clang-8 -emit-llvm $test_file.c -S -o $test_file.ll
+	echo "########Compiling $test_file########"
 	opt -load $LLVM_HOME/build/lib/LLVMTest.so -test < $test_file.ll > /dev/null
+	echo "########End Compiling########"
 	rm $test_file.ll
 done
 
